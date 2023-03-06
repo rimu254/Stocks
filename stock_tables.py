@@ -6,7 +6,7 @@ import pandas as pd
 import altair as alt
 
 def run():
-    st.header(':red[Company Stock Charts] :chart_with_upwards_trend:')
+    st.header('Company Stock Charts :chart_with_upwards_trend:')
     st.write("""  
            ##  Stock Charts
              The charts are interactive and you can zoom in and out of the charts and view the exact price in relation to the date.
@@ -19,6 +19,10 @@ def run():
     amazon = 'AMZN'
     google = 'GOOGL'
     meta = "META"
+    twitter = "TWTR"
+    microsoft = "MSFT"
+
+    company_names= [tesla, apple, netflix, amazon, google, meta, twitter, microsoft]
 
     tesla_data = yf.Ticker(tesla)
     apple_data = yf.Ticker(apple)
@@ -26,8 +30,12 @@ def run():
     amazon_data = yf.Ticker(amazon)
     google_data = yf.Ticker(google)
     meta_data = yf.Ticker(meta)
+    twitter_data = yf.Ticker(twitter)
+    microsoft_data = yf.Ticker(microsoft)
 
-    companies_data = yf.download(tickers=[tesla, apple, netflix, amazon, google, meta], period='1d', interval='1d')
+
+
+    companies_data = yf.download(tickers=[tesla, apple, netflix, amazon, google, meta,twitter,microsoft], period='1d', interval='1d')
 
     st.subheader('Date range')
     col1, col2 = st.columns(2)
@@ -51,6 +59,8 @@ def run():
     amazon_df = amazon_data.history(period='1d', start=start_date, end=end_date)
     google_df = google_data.history(period='1d', start=start_date, end=end_date)
     meta_df = meta_data.history(period='1d', start=start_date, end=end_date)
+    twitter_df = twitter_data.history(period='1d', start=start_date, end=end_date)
+    microsoft_df = microsoft_data.history(period='1d', start=start_date, end=end_date)
 
     tesla_df['Company'] = 'Tesla Inc'
     apple_df['Company'] = 'Apple Inc.'
@@ -58,8 +68,10 @@ def run():
     amazon_df['Company'] = 'Amazon.com Inc.'
     google_df['Company'] = 'Alphabet Inc. Class A'
     meta_df['Company'] = 'Meta Platforms Inc.'
+    twitter_df['Company'] = 'Twitter Inc.'
+    microsoft_df['Company'] = 'Microsoft Corporation'
 
-    companies = pd.concat([tesla_df, apple_df, netflix_df, amazon_df, google_df, meta_df])
+    companies = pd.concat([tesla_df, apple_df, netflix_df, amazon_df, google_df, meta_df, twitter_df, microsoft_df])
 
     companies.rename(columns={0: 'Date'}, inplace=True)
 
@@ -72,7 +84,7 @@ def run():
 
     try:
         st.sidebar.header("Stock Charts")
-        company_info = st.sidebar.multiselect("Select a company", companies['Company'].unique())
+        company_info = st.sidebar.multiselect("Select a company", companies['Company'].unique(), default=['Tesla Inc'])
 
         if len(company_info) == 0:
             st.error('Please select a company.')

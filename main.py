@@ -1,23 +1,22 @@
+
 import streamlit as st
 
 
-st.set_page_config(page_title='Stockly', page_icon=':chart_with_upwards_trend:')
+icon = "https://thumbs.dreamstime.com/b/growing-up-trend-stem-chart-trading-vector-design-illustration-template-160606828.jpg"
+st.set_page_config(page_title='Stockly', page_icon=icon)
 
 st.sidebar.header('Navigation')
-page = st.sidebar.radio("Go to",
+page = st.sidebar.radio("Go to:",
                         ('Home',
                          'Predictions',
-                         'Company Chart'))
+                         'Company Charts'))
 if page == 'Home':
-    st.title('Stockly')
-    st.write('''
-        This is a simple app that shows the stock data of the companies.
-        You can select a company and see the data for that company.
-        ''')
+    from home import run
+    run()
 
 
 elif page == 'Predictions':
-    from prediction_page import run
+    from volume import run
     run()
 
 else:
