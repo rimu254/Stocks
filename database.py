@@ -13,10 +13,6 @@ deta = Deta(db_key)
 
 db = deta.Base("stock_base")
 
-def create_user(username, password, name):
-    #if user does not exist, create the user
-    #if user exists, return an error
-    return db.put({"key": username, "password": password, "name": name})
 
 def insert_cookie(expiry_days,key,name):
     return db.put({"expiry_days": expiry_days, "key": key, "name": name})
@@ -36,3 +32,5 @@ def delete_user(username):
 def update_user(username):
     return db.update(username)
 
+def fetch_name(name):
+    return db.fetch({"name": name})
