@@ -1,0 +1,16 @@
+[theme]
+#for interractive elemement
+primaryColor = "#008080" #dark teal
+
+#for main content area
+#white background
+backgroundColor = "#FFFFFF" #white
+
+#for sidebar
+sidebarColor = "#B22222" #maroon
+
+#for text
+textColor = "#000000" #black
+
+#font
+font = "sans serif"

@@ -53,6 +53,9 @@ def run():
     else:
         st.warning('Invalid date range. Please try again.')
 
+
+
+
     tesla_df = tesla_data.history(period='1d', start=start_date, end=end_date)
     apple_df = apple_data.history(period='1d', start=start_date, end=end_date)
     netflix_df = netflix_data.history(period='1d', start=start_date, end=end_date)
@@ -132,3 +135,6 @@ def run():
             Connection error: %s
             """ % e.reason
         )
+
+
+
