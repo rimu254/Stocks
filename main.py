@@ -24,8 +24,7 @@ def signup():
         db.insert_user(username, password, name)
         st.success('User created successfully')
 
-def login_callback():
-    st.write('st.session_state.loggedin')
+
 def login():
     st.subheader('Confirm Credentials')
     username = st.text_input('Username')
@@ -46,31 +45,26 @@ st.sidebar.header('STOCKLY APP')
 opts = ['Login', 'Sign Up']
 option = st.sidebar.selectbox("Login to continue:", opts)
 if option == 'Login':
-        login()
-        if st.session_state.onclick:
-            st.sidebar.header('Navigation')
+        user=login()
+        st.sidebar.header('Navigation')
 
-            page_options = ['Home', 'Predictions', 'Company Charts']
-            page = st.sidebar.radio("Go to:", (
+        page = st.sidebar.radio("Go to:", (
                 'Home',
                 'Predictions',
                 'Company Charts'
             ))
 
-            if page == 'Home':
-                from home import run
+        if page == 'Home':
+            from home import run
+            run()
 
-                run()
+        elif page == 'Predictions':
+            from predictions import run
+            run()
 
-            elif page == 'Predictions':
-                from predictions import run
-
-                run()
-
-            else:
-                from company_charts import run
-
-                run()
+        else:
+            from company_charts import run
+            run()
 
 
 else:
