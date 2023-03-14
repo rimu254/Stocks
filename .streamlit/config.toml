@@ -3,11 +3,11 @@
 primaryColor = "#008080" #dark teal
 
 #for main content area
-#white background
-backgroundColor = "#FFFFFF" #white
+#all background
+backgroundColor = "#DCDCDC" #gray
 
-#for sidebar
-sidebarColor = "#B22222" #maroon
+#for sidebar background
+sidebarBackgroundColor  = "#00CD00" #green
 
 #for text
 textColor = "#000000" #black
