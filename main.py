@@ -1,9 +1,7 @@
 import streamlit as st
-import os
 import database as db
 from streamlit.server.server import Server
 from streamlit.scriptrunner import get_script_run_ctx as get_report_ctx
-
 
 
 # Setting the page title and icon
@@ -81,45 +79,36 @@ def login():
             st.error('User not found, signup first')
 
 
-
 # Initialize the session state
 session_state = SessionState.get(logged_in=False)
 
 # Create login page
 st.sidebar.header('STOCKLY LOGIN')
 
-option = st.sidebar.radio("Select an option:",
-                          ('Login',
-                          'Sign Up'))
-
+opts = ['Login', 'Sign Up']
+option = st.sidebar.selectbox("Select an option:", opts)
+#while not session_state.logged_in:
 if option == 'Login':
-    user = login()
-    if user:
-        session_state.logged_in = True
-
-    if session_state.logged_in:
-        username = user['key']
-        st.sidebar.title(f"Welcome {username}!")
+        user = login()
         st.sidebar.header('Navigation')
 
-        page = st.sidebar.radio("Go to:",
-                                ('Home',
-                                 'Predictions',
-                                 'Company Charts'))
+        page_options = ['Home', 'Predictions', 'Company Charts']
+        page = st.sidebar.radio("Go to:", (
+                                        'Home',
+                                        'Predictions',
+                                        'Company Charts'
+                                     ))
 
         if page == 'Home':
             from home import run
-
             run()
 
         elif page == 'Predictions':
             from predictions import run
-
             run()
 
         else:
             from company_charts import run
-
             run()
 
 else:
